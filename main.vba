@@ -44,7 +44,7 @@ Sub Button2_Click()
         Debug.Print "No highlighted cells found." & lastRow & " " & lastCol
         Exit Sub
     Else
-        Debug.Print "Highlighted cells found: " & highlightedCells.Cells.Count
+        Debug.Print "Highlighted cells found: " & highlightedCells.Cells.Count / lastCol
         
           ' Create a new Word Application
             Set WordApp = CreateObject("Word.Application")
@@ -60,7 +60,9 @@ Sub Button2_Click()
             j = 1
             For Each cell In ws.Cells(9, 2).Resize(1, lastCol)
                 WordTable.cell(1, j).Range.Font.Bold = True
-                WordTable.cell(1, j).Range.Text = cell.Value ' Add cell value to the table
+                WordTable.cell(1, j).Range.Text = cell.Value
+                WordTable.cell(1, j).Range.Shading.BackgroundPatternColor = RGB(18, 80, 27)
+                WordTable.cell(1, j).Range.Shading.ForegroundPatternColor = wdColorWhite
                 j = j + 1
             Next cell
             
@@ -77,8 +79,10 @@ Sub Button2_Click()
                 End If
             Next cell
             ' Format the Word table (optional)
-            WordTable.Style = "Table Grid"
+            ' WordTable.Style = "Table Grid"
             ' Cleanup
+            WordTable.Borders.Enable = True
+            
             Set WordTable = Nothing
             Set WordDoc = Nothing
             Set WordApp = Nothing
@@ -89,4 +93,3 @@ Sub Button2_Click()
     End If
     
 End Sub
-
