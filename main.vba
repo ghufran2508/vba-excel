@@ -56,8 +56,16 @@ Sub Button2_Click()
             Debug.Print rowCount & " " & lastCol
             ' Assuming you want to display address and value in two columns
             Set WordTable = WordDoc.Tables.Add(WordDoc.Range, rowCount, lastCol)
+            
+            j = 1
+            For Each cell In ws.Cells(9, 2).Resize(1, lastCol)
+                WordTable.cell(1, j).Range.Font.Bold = True
+                WordTable.cell(1, j).Range.Text = cell.Value ' Add cell value to the table
+                j = j + 1
+            Next cell
+            
             ' Loop through the highlighted cells and add to the Word table
-            i = 1
+            i = 2
             j = 1
             For Each cell In highlightedCells
                 WordTable.cell(i, j).Range.Text = cell.Value ' Add cell value to the table
