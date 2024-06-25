@@ -55,7 +55,7 @@ Sub Button2_Click()
             rowCount = highlightedCells.Cells.Count / lastCol
             Debug.Print rowCount & " " & lastCol
             ' Assuming you want to display address and value in two columns
-            Set WordTable = WordDoc.Tables.Add(WordDoc.Range, rowCount, lastCol)
+            Set WordTable = WordDoc.Tables.Add(WordDoc.Range, rowCount + 1, lastCol)
             
             j = 1
             For Each cell In ws.Cells(9, 2).Resize(1, lastCol)
